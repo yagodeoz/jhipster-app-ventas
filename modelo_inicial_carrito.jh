@@ -16,7 +16,6 @@ entity CuentaCliente {
 }
 
 entity Productos {
-	idEmpresa Long,
     descripcionProducto String,
     imagenProducto ImageBlob,
     precioProducto Double,
@@ -27,13 +26,10 @@ entity Productos {
 }
 
 entity CarritoCliente {
-	cuentaCliente Long,
     fechaAcceso LocalDate,
     fechaUltimaCompra LocalDate,
 }
 entity CarritoClienteDetalle {
-	carrito Long,
-	producto Long,
     cantidad Long,
     total Double,
 }
