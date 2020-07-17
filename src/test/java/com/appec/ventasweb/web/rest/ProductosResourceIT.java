@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ProductosResourceIT {
 
-    private static final Long DEFAULT_ID_EMPRESA = 1L;
-    private static final Long UPDATED_ID_EMPRESA = 2L;
-
     private static final String DEFAULT_DESCRIPCION_PRODUCTO = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPCION_PRODUCTO = "BBBBBBBBBB";
 
@@ -75,7 +72,6 @@ public class ProductosResourceIT {
      */
     public static Productos createEntity() {
         Productos productos = new Productos()
-            .idEmpresa(DEFAULT_ID_EMPRESA)
             .descripcionProducto(DEFAULT_DESCRIPCION_PRODUCTO)
             .imagenProducto(DEFAULT_IMAGEN_PRODUCTO)
             .imagenProductoContentType(DEFAULT_IMAGEN_PRODUCTO_CONTENT_TYPE)
@@ -94,7 +90,6 @@ public class ProductosResourceIT {
      */
     public static Productos createUpdatedEntity() {
         Productos productos = new Productos()
-            .idEmpresa(UPDATED_ID_EMPRESA)
             .descripcionProducto(UPDATED_DESCRIPCION_PRODUCTO)
             .imagenProducto(UPDATED_IMAGEN_PRODUCTO)
             .imagenProductoContentType(UPDATED_IMAGEN_PRODUCTO_CONTENT_TYPE)
@@ -125,7 +120,6 @@ public class ProductosResourceIT {
         List<Productos> productosList = productosRepository.findAll();
         assertThat(productosList).hasSize(databaseSizeBeforeCreate + 1);
         Productos testProductos = productosList.get(productosList.size() - 1);
-        assertThat(testProductos.getIdEmpresa()).isEqualTo(DEFAULT_ID_EMPRESA);
         assertThat(testProductos.getDescripcionProducto()).isEqualTo(DEFAULT_DESCRIPCION_PRODUCTO);
         assertThat(testProductos.getImagenProducto()).isEqualTo(DEFAULT_IMAGEN_PRODUCTO);
         assertThat(testProductos.getImagenProductoContentType()).isEqualTo(DEFAULT_IMAGEN_PRODUCTO_CONTENT_TYPE);
@@ -165,7 +159,6 @@ public class ProductosResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productos.getId())))
-            .andExpect(jsonPath("$.[*].idEmpresa").value(hasItem(DEFAULT_ID_EMPRESA.intValue())))
             .andExpect(jsonPath("$.[*].descripcionProducto").value(hasItem(DEFAULT_DESCRIPCION_PRODUCTO)))
             .andExpect(jsonPath("$.[*].imagenProductoContentType").value(hasItem(DEFAULT_IMAGEN_PRODUCTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].imagenProducto").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEN_PRODUCTO))))
@@ -186,7 +179,6 @@ public class ProductosResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(productos.getId()))
-            .andExpect(jsonPath("$.idEmpresa").value(DEFAULT_ID_EMPRESA.intValue()))
             .andExpect(jsonPath("$.descripcionProducto").value(DEFAULT_DESCRIPCION_PRODUCTO))
             .andExpect(jsonPath("$.imagenProductoContentType").value(DEFAULT_IMAGEN_PRODUCTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.imagenProducto").value(Base64Utils.encodeToString(DEFAULT_IMAGEN_PRODUCTO)))
@@ -213,7 +205,6 @@ public class ProductosResourceIT {
         // Update the productos
         Productos updatedProductos = productosRepository.findById(productos.getId()).get();
         updatedProductos
-            .idEmpresa(UPDATED_ID_EMPRESA)
             .descripcionProducto(UPDATED_DESCRIPCION_PRODUCTO)
             .imagenProducto(UPDATED_IMAGEN_PRODUCTO)
             .imagenProductoContentType(UPDATED_IMAGEN_PRODUCTO_CONTENT_TYPE)
@@ -232,7 +223,6 @@ public class ProductosResourceIT {
         List<Productos> productosList = productosRepository.findAll();
         assertThat(productosList).hasSize(databaseSizeBeforeUpdate);
         Productos testProductos = productosList.get(productosList.size() - 1);
-        assertThat(testProductos.getIdEmpresa()).isEqualTo(UPDATED_ID_EMPRESA);
         assertThat(testProductos.getDescripcionProducto()).isEqualTo(UPDATED_DESCRIPCION_PRODUCTO);
         assertThat(testProductos.getImagenProducto()).isEqualTo(UPDATED_IMAGEN_PRODUCTO);
         assertThat(testProductos.getImagenProductoContentType()).isEqualTo(UPDATED_IMAGEN_PRODUCTO_CONTENT_TYPE);

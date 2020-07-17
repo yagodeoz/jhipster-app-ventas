@@ -21,9 +21,6 @@ public class Productos implements Serializable {
     @Id
     private String id;
 
-    @Field("id_empresa")
-    private Long idEmpresa;
-
     @Field("descripcion_producto")
     private String descripcionProducto;
 
@@ -64,19 +61,6 @@ public class Productos implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public Productos idEmpresa(Long idEmpresa) {
-        this.idEmpresa = idEmpresa;
-        return this;
-    }
-
-    public void setIdEmpresa(Long idEmpresa) {
-        this.idEmpresa = idEmpresa;
     }
 
     public String getDescripcionProducto() {
@@ -243,7 +227,6 @@ public class Productos implements Serializable {
     public String toString() {
         return "Productos{" +
             "id=" + getId() +
-            ", idEmpresa=" + getIdEmpresa() +
             ", descripcionProducto='" + getDescripcionProducto() + "'" +
             ", imagenProducto='" + getImagenProducto() + "'" +
             ", imagenProductoContentType='" + getImagenProductoContentType() + "'" +
