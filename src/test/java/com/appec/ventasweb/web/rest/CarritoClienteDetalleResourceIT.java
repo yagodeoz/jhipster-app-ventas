@@ -29,12 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class CarritoClienteDetalleResourceIT {
 
-    private static final Long DEFAULT_CARRITO = 1L;
-    private static final Long UPDATED_CARRITO = 2L;
-
-    private static final Long DEFAULT_PRODUCTO = 1L;
-    private static final Long UPDATED_PRODUCTO = 2L;
-
     private static final Long DEFAULT_CANTIDAD = 1L;
     private static final Long UPDATED_CANTIDAD = 2L;
 
@@ -60,8 +54,6 @@ public class CarritoClienteDetalleResourceIT {
      */
     public static CarritoClienteDetalle createEntity() {
         CarritoClienteDetalle carritoClienteDetalle = new CarritoClienteDetalle()
-            .carrito(DEFAULT_CARRITO)
-            .producto(DEFAULT_PRODUCTO)
             .cantidad(DEFAULT_CANTIDAD)
             .total(DEFAULT_TOTAL);
         return carritoClienteDetalle;
@@ -74,8 +66,6 @@ public class CarritoClienteDetalleResourceIT {
      */
     public static CarritoClienteDetalle createUpdatedEntity() {
         CarritoClienteDetalle carritoClienteDetalle = new CarritoClienteDetalle()
-            .carrito(UPDATED_CARRITO)
-            .producto(UPDATED_PRODUCTO)
             .cantidad(UPDATED_CANTIDAD)
             .total(UPDATED_TOTAL);
         return carritoClienteDetalle;
@@ -100,8 +90,6 @@ public class CarritoClienteDetalleResourceIT {
         List<CarritoClienteDetalle> carritoClienteDetalleList = carritoClienteDetalleRepository.findAll();
         assertThat(carritoClienteDetalleList).hasSize(databaseSizeBeforeCreate + 1);
         CarritoClienteDetalle testCarritoClienteDetalle = carritoClienteDetalleList.get(carritoClienteDetalleList.size() - 1);
-        assertThat(testCarritoClienteDetalle.getCarrito()).isEqualTo(DEFAULT_CARRITO);
-        assertThat(testCarritoClienteDetalle.getProducto()).isEqualTo(DEFAULT_PRODUCTO);
         assertThat(testCarritoClienteDetalle.getCantidad()).isEqualTo(DEFAULT_CANTIDAD);
         assertThat(testCarritoClienteDetalle.getTotal()).isEqualTo(DEFAULT_TOTAL);
     }
@@ -135,8 +123,6 @@ public class CarritoClienteDetalleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(carritoClienteDetalle.getId())))
-            .andExpect(jsonPath("$.[*].carrito").value(hasItem(DEFAULT_CARRITO.intValue())))
-            .andExpect(jsonPath("$.[*].producto").value(hasItem(DEFAULT_PRODUCTO.intValue())))
             .andExpect(jsonPath("$.[*].cantidad").value(hasItem(DEFAULT_CANTIDAD.intValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())));
     }
@@ -151,8 +137,6 @@ public class CarritoClienteDetalleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(carritoClienteDetalle.getId()))
-            .andExpect(jsonPath("$.carrito").value(DEFAULT_CARRITO.intValue()))
-            .andExpect(jsonPath("$.producto").value(DEFAULT_PRODUCTO.intValue()))
             .andExpect(jsonPath("$.cantidad").value(DEFAULT_CANTIDAD.intValue()))
             .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.doubleValue()));
     }
@@ -173,8 +157,6 @@ public class CarritoClienteDetalleResourceIT {
         // Update the carritoClienteDetalle
         CarritoClienteDetalle updatedCarritoClienteDetalle = carritoClienteDetalleRepository.findById(carritoClienteDetalle.getId()).get();
         updatedCarritoClienteDetalle
-            .carrito(UPDATED_CARRITO)
-            .producto(UPDATED_PRODUCTO)
             .cantidad(UPDATED_CANTIDAD)
             .total(UPDATED_TOTAL);
 
@@ -187,8 +169,6 @@ public class CarritoClienteDetalleResourceIT {
         List<CarritoClienteDetalle> carritoClienteDetalleList = carritoClienteDetalleRepository.findAll();
         assertThat(carritoClienteDetalleList).hasSize(databaseSizeBeforeUpdate);
         CarritoClienteDetalle testCarritoClienteDetalle = carritoClienteDetalleList.get(carritoClienteDetalleList.size() - 1);
-        assertThat(testCarritoClienteDetalle.getCarrito()).isEqualTo(UPDATED_CARRITO);
-        assertThat(testCarritoClienteDetalle.getProducto()).isEqualTo(UPDATED_PRODUCTO);
         assertThat(testCarritoClienteDetalle.getCantidad()).isEqualTo(UPDATED_CANTIDAD);
         assertThat(testCarritoClienteDetalle.getTotal()).isEqualTo(UPDATED_TOTAL);
     }

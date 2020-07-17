@@ -2,10 +2,6 @@
   "name": "CarritoCliente",
   "fields": [
     {
-      "fieldName": "cuentaCliente",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "fechaAcceso",
       "fieldType": "LocalDate"
     },

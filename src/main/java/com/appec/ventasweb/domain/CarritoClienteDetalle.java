@@ -19,12 +19,6 @@ public class CarritoClienteDetalle implements Serializable {
     @Id
     private String id;
 
-    @Field("carrito")
-    private Long carrito;
-
-    @Field("producto")
-    private Long producto;
-
     @Field("cantidad")
     private Long cantidad;
 
@@ -48,32 +42,6 @@ public class CarritoClienteDetalle implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getCarrito() {
-        return carrito;
-    }
-
-    public CarritoClienteDetalle carrito(Long carrito) {
-        this.carrito = carrito;
-        return this;
-    }
-
-    public void setCarrito(Long carrito) {
-        this.carrito = carrito;
-    }
-
-    public Long getProducto() {
-        return producto;
-    }
-
-    public CarritoClienteDetalle producto(Long producto) {
-        this.producto = producto;
-        return this;
-    }
-
-    public void setProducto(Long producto) {
-        this.producto = producto;
     }
 
     public Long getCantidad() {
@@ -150,8 +118,6 @@ public class CarritoClienteDetalle implements Serializable {
     public String toString() {
         return "CarritoClienteDetalle{" +
             "id=" + getId() +
-            ", carrito=" + getCarrito() +
-            ", producto=" + getProducto() +
             ", cantidad=" + getCantidad() +
             ", total=" + getTotal() +
             "}";

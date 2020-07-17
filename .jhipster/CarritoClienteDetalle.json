@@ -2,14 +2,6 @@
   "name": "CarritoClienteDetalle",
   "fields": [
     {
-      "fieldName": "carrito",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "producto",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "cantidad",
       "fieldType": "Long"
     },

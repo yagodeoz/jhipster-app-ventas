@@ -22,9 +22,6 @@ public class CarritoCliente implements Serializable {
     @Id
     private String id;
 
-    @Field("cuenta_cliente")
-    private Long cuentaCliente;
-
     @Field("fecha_acceso")
     private LocalDate fechaAcceso;
 
@@ -47,19 +44,6 @@ public class CarritoCliente implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getCuentaCliente() {
-        return cuentaCliente;
-    }
-
-    public CarritoCliente cuentaCliente(Long cuentaCliente) {
-        this.cuentaCliente = cuentaCliente;
-        return this;
-    }
-
-    public void setCuentaCliente(Long cuentaCliente) {
-        this.cuentaCliente = cuentaCliente;
     }
 
     public LocalDate getFechaAcceso() {
@@ -148,7 +132,6 @@ public class CarritoCliente implements Serializable {
     public String toString() {
         return "CarritoCliente{" +
             "id=" + getId() +
-            ", cuentaCliente=" + getCuentaCliente() +
             ", fechaAcceso='" + getFechaAcceso() + "'" +
             ", fechaUltimaCompra='" + getFechaUltimaCompra() + "'" +
             "}";

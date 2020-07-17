@@ -2,10 +2,6 @@
   "name": "Productos",
   "fields": [
     {
-      "fieldName": "idEmpresa",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "descripcionProducto",
       "fieldType": "String"
     },

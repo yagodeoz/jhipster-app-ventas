@@ -31,9 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class CarritoClienteResourceIT {
 
-    private static final Long DEFAULT_CUENTA_CLIENTE = 1L;
-    private static final Long UPDATED_CUENTA_CLIENTE = 2L;
-
     private static final LocalDate DEFAULT_FECHA_ACCESO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_FECHA_ACCESO = LocalDate.now(ZoneId.systemDefault());
 
@@ -59,7 +56,6 @@ public class CarritoClienteResourceIT {
      */
     public static CarritoCliente createEntity() {
         CarritoCliente carritoCliente = new CarritoCliente()
-            .cuentaCliente(DEFAULT_CUENTA_CLIENTE)
             .fechaAcceso(DEFAULT_FECHA_ACCESO)
             .fechaUltimaCompra(DEFAULT_FECHA_ULTIMA_COMPRA);
         return carritoCliente;
@@ -72,7 +68,6 @@ public class CarritoClienteResourceIT {
      */
     public static CarritoCliente createUpdatedEntity() {
         CarritoCliente carritoCliente = new CarritoCliente()
-            .cuentaCliente(UPDATED_CUENTA_CLIENTE)
             .fechaAcceso(UPDATED_FECHA_ACCESO)
             .fechaUltimaCompra(UPDATED_FECHA_ULTIMA_COMPRA);
         return carritoCliente;
@@ -97,7 +92,6 @@ public class CarritoClienteResourceIT {
         List<CarritoCliente> carritoClienteList = carritoClienteRepository.findAll();
         assertThat(carritoClienteList).hasSize(databaseSizeBeforeCreate + 1);
         CarritoCliente testCarritoCliente = carritoClienteList.get(carritoClienteList.size() - 1);
-        assertThat(testCarritoCliente.getCuentaCliente()).isEqualTo(DEFAULT_CUENTA_CLIENTE);
         assertThat(testCarritoCliente.getFechaAcceso()).isEqualTo(DEFAULT_FECHA_ACCESO);
         assertThat(testCarritoCliente.getFechaUltimaCompra()).isEqualTo(DEFAULT_FECHA_ULTIMA_COMPRA);
     }
@@ -131,7 +125,6 @@ public class CarritoClienteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(carritoCliente.getId())))
-            .andExpect(jsonPath("$.[*].cuentaCliente").value(hasItem(DEFAULT_CUENTA_CLIENTE.intValue())))
             .andExpect(jsonPath("$.[*].fechaAcceso").value(hasItem(DEFAULT_FECHA_ACCESO.toString())))
             .andExpect(jsonPath("$.[*].fechaUltimaCompra").value(hasItem(DEFAULT_FECHA_ULTIMA_COMPRA.toString())));
     }
@@ -146,7 +139,6 @@ public class CarritoClienteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(carritoCliente.getId()))
-            .andExpect(jsonPath("$.cuentaCliente").value(DEFAULT_CUENTA_CLIENTE.intValue()))
             .andExpect(jsonPath("$.fechaAcceso").value(DEFAULT_FECHA_ACCESO.toString()))
             .andExpect(jsonPath("$.fechaUltimaCompra").value(DEFAULT_FECHA_ULTIMA_COMPRA.toString()));
     }
@@ -167,7 +159,6 @@ public class CarritoClienteResourceIT {
         // Update the carritoCliente
         CarritoCliente updatedCarritoCliente = carritoClienteRepository.findById(carritoCliente.getId()).get();
         updatedCarritoCliente
-            .cuentaCliente(UPDATED_CUENTA_CLIENTE)
             .fechaAcceso(UPDATED_FECHA_ACCESO)
             .fechaUltimaCompra(UPDATED_FECHA_ULTIMA_COMPRA);
 
@@ -180,7 +171,6 @@ public class CarritoClienteResourceIT {
         List<CarritoCliente> carritoClienteList = carritoClienteRepository.findAll();
         assertThat(carritoClienteList).hasSize(databaseSizeBeforeUpdate);
         CarritoCliente testCarritoCliente = carritoClienteList.get(carritoClienteList.size() - 1);
-        assertThat(testCarritoCliente.getCuentaCliente()).isEqualTo(UPDATED_CUENTA_CLIENTE);
         assertThat(testCarritoCliente.getFechaAcceso()).isEqualTo(UPDATED_FECHA_ACCESO);
         assertThat(testCarritoCliente.getFechaUltimaCompra()).isEqualTo(UPDATED_FECHA_ULTIMA_COMPRA);
     }
